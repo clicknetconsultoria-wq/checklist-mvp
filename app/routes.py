@@ -1,20 +1,21 @@
-from fastapi import APIRouter, HTTPException
-from app.schemas import ChecklistResponse
-from app.storage import create_checklist, get_checklist_by_id
+from fastapi import APIRouter, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from app.storage import create_checklist
+from app.schemas import ChecklistCreate, ChecklistResponse
 
 router = APIRouter()
+templates = Jinja2Templates(directory="app/templates")
+
+
+@router.get("/", response_class=HTMLResponse)
+def formulario(request: Request):
+    return templates.TemplateResponse(
+        "checklist.html", {"request": request}
+    )
 
 
 @router.post("/checklists", response_model=ChecklistResponse)
-def criar_checklist(payload: dict):
-    return create_checklist(payload)
-
-
-@router.get("/checklists/{checklist_id}", response_model=ChecklistResponse)
-def obter_checklist(checklist_id: str):
-    checklist = get_checklist_by_id(checklist_id)
-
-    if not checklist:
-        raise HTTPException(status_code=404, detail="Checklist não encontrado")
-
+def criar_checklist(payload: ChecklistCreate):
+    checklist = create_checklist(payload.dict())
     return checklist

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Checklist Veicular</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Checklist Veicular</h2>
+
+<form id="checklistForm">
+    <label>Placa</label>
+    <input type="text" id="placa" required>
+
+    <label>Modelo</label>
+    <input type="text" id="modelo" required>
+
+    <h3>Itens</h3>
+
+    <div class="item">
+        <label>Óleo</label>
+        <select data-item="Óleo">
+            <option>OK</option>
+            <option>Não OK</option>
+        </select>
+    </div>
+
+    <div class="item">
+        <label>Combustível</label>
+        <select data-item="Combustível">
+            <option>1/4</option>
+            <option>1/2</option>
+            <option>3/4</option>
+            <option>Cheio</option>
+        </select>
+    </div>
+
+    <label>Observações</label>
+    <textarea id="observacoes"></textarea>
+
+    <label>Responsável</label>
+    <input type="text" id="responsavel" required>
+
+    <button type="submit">Enviar Checklist</button>
+</form>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
