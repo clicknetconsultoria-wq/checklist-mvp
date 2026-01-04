@@ -9,6 +9,9 @@ from app.models import Checklist
 from app.schemas import ChecklistCreate, ChecklistResponse
 from app.services.laudo import gerar_laudo
 
+from fastapi.responses import StreamingResponse
+from app.services.pdf import gerar_pdf_laudo
+
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
@@ -55,3 +58,19 @@ def obter_laudo(checklist_id: str, db: Session = Depends(get_db)):
 
     laudo = gerar_laudo(checklist)
     return {"checklist_id": checklist_id, "laudo": laudo}
+
+@router.get("/checklists/{checklist_id}/pdf")
+def baixar_pdf(checklist_id: str, db: Session = Depends(get_db)):
+    checklist = db.query(Checklist).filter(Checklist.id == checklist_id).first()
+    if not checklist:
+        raise HTTPException(status_code=404, detail="Checklist não encontrado")
+
+    pdf = gerar_pdf_laudo(checklist)
+
+    return StreamingResponse(
+        pdf,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f"inline; filename=laudo_{checklist_id}.pdf"
+        }
+    )
