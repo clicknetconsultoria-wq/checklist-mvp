@@ -6,6 +6,8 @@ from app.schemas import ChecklistCreate, ChecklistResponse
 from app.storage import get_checklist_by_id
 from app.services.laudo import gerar_laudo
 from app.schemas import LaudoResponse
+from app.storage import list_checklists
+
 
 
 router = APIRouter()
@@ -37,3 +39,20 @@ def obter_laudo(checklist_id: str):
         "checklist_id": checklist_id,
         "laudo": laudo
     }
+
+
+@router.get("/checklists", response_model=ChecklistListResponse)
+def listar_checklists():
+    data = list_checklists()
+
+    resposta = []
+    for item in data:
+        resposta.append({
+            "id": item["id"],
+            "placa": item["veiculo"]["placa"],
+            "modelo": item["veiculo"]["modelo"],
+            "criado_em": item["criado_em"],
+            "responsavel": item.get("responsavel")
+        })
+
+    return {"checklists": resposta}

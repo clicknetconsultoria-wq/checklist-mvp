@@ -40,3 +40,6 @@ def get_checklist_by_id(checklist_id: str):
         if checklist["id"] == checklist_id:
             return checklist
     return None
+
+def list_checklists():
+    return load_checklists()
