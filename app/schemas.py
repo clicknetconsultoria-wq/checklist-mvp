@@ -3,6 +3,7 @@ from typing import List, Optional
 from datetime import datetime
 
 
+
 class ChecklistItem(BaseModel):
     descricao: str
     valor: str
@@ -23,3 +24,7 @@ class ChecklistCreate(BaseModel):
 class ChecklistResponse(ChecklistCreate):
     id: str
     criado_em: datetime
+
+class LaudoResponse(BaseModel):
+    checklist_id: str
+    laudo: str

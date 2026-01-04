@@ -1,18 +1,34 @@
-from app.models import ChecklistRequest
 from datetime import datetime
 
-def gerar_laudo(data: ChecklistRequest) -> str:
-    linhas = [
-        "🛠️ *LAUDO DE CHECKLIST VEICULAR*",
-        f"📅 Data: {datetime.now().strftime('%d/%m/%Y %H:%M')}",
-        f"👤 Cliente: {data.cliente}",
-        f"👨‍🔧 Técnico: {data.tecnico}",
-        f"🚗 Veículo: {data.veiculo.modelo} - {data.veiculo.placa}",
-        "",
-        "*Itens verificados:*"
-    ]
 
-    for item, status in data.checklist.items():
-        linhas.append(f"- {item}: {status}")
+def gerar_laudo(checklist: dict) -> str:
+    veiculo = checklist["veiculo"]
+    itens = checklist["itens"]
 
-    return "\n".join(linhas)
+    linhas_itens = []
+    for item in itens:
+        linhas_itens.append(f"- {item['descricao']}: {item['valor']}")
+
+    texto = f"""
+📋 *LAUDO DE CHECKLIST VEICULAR*
+
+🚗 Veículo:
+Placa: {veiculo['placa']}
+Modelo: {veiculo['modelo']}
+
+🛠️ Itens Verificados:
+{chr(10).join(linhas_itens)}
+
+📝 Observações:
+{checklist.get("observacoes", "Não informado")}
+
+👤 Responsável:
+{checklist.get("responsavel", "Não informado")}
+
+📅 Data:
+{datetime.fromisoformat(checklist["criado_em"]).strftime("%d/%m/%Y %H:%M")}
+
+Declaro que as informações acima refletem a condição do veículo no momento da vistoria.
+"""
+
+    return texto.strip()
