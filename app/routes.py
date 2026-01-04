@@ -41,18 +41,7 @@ def obter_laudo(checklist_id: str):
     }
 
 
-@router.get("/checklists", response_model=ChecklistListResponse)
-def listar_checklists():
-    data = list_checklists()
+@router.get("/checklists", response_model=list[ChecklistResponse])
+def listar_checklists(db: Session = Depends(get_db)):
+    return db.query(Checklist).all()
 
-    resposta = []
-    for item in data:
-        resposta.append({
-            "id": item["id"],
-            "placa": item["veiculo"]["placa"],
-            "modelo": item["veiculo"]["modelo"],
-            "criado_em": item["criado_em"],
-            "responsavel": item.get("responsavel")
-        })
-
-    return {"checklists": resposta}
