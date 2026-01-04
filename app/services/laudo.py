@@ -1,9 +1,8 @@
 from datetime import datetime
 
-
-def gerar_laudo(checklist: dict) -> str:
-    veiculo = checklist["veiculo"]
-    itens = checklist["itens"]
+def gerar_laudo(checklist) -> str:
+    veiculo = checklist.veiculo
+    itens = checklist.itens
 
     linhas_itens = []
     for item in itens:
@@ -14,19 +13,19 @@ def gerar_laudo(checklist: dict) -> str:
 
 🚗 Veículo:
 Placa: {veiculo['placa']}
-Modelo: {veiculo['modelo']}
+Modelo: {veiculo.get('modelo', '')}
 
 🛠️ Itens Verificados:
 {chr(10).join(linhas_itens)}
 
 📝 Observações:
-{checklist.get("observacoes", "Não informado")}
+{checklist.observacoes or "Não informado"}
 
 👤 Responsável:
-{checklist.get("responsavel", "Não informado")}
+{checklist.responsavel}
 
 📅 Data:
-{datetime.fromisoformat(checklist["criado_em"]).strftime("%d/%m/%Y %H:%M")}
+{checklist.criado_em.strftime("%d/%m/%Y %H:%M")}
 
 Declaro que as informações acima refletem a condição do veículo no momento da vistoria.
 """
