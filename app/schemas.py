@@ -1,22 +1,20 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List
+from typing import Dict, Optional
 
 class VeiculoSchema(BaseModel):
     placa: str
-    modelo: str
+    modelo: Optional[str] = None
 
-class ItemChecklistSchema(BaseModel):
-    descricao: str
-    valor: str
-
-class ChecklistResponse(BaseModel):
-    id: str
+class ChecklistCreate(BaseModel):
+    cliente: str
+    tecnico: str
     veiculo: VeiculoSchema
-    itens: List[ItemChecklistSchema]
-    observacoes: str | None
-    responsavel: str
+    checklist: Dict[str, str]
+
+class ChecklistResponse(ChecklistCreate):
+    id: str
     criado_em: datetime
 
     class Config:
-        from_attributes = True  # 👈 SQLAlchemy
+        from_attributes = True
