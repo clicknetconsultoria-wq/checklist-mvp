@@ -15,8 +15,8 @@ document.getElementById("checklistForm").addEventListener("submit", async (e) =>
             modelo: document.getElementById("modelo").value
         },
         itens: itens,
-        observacoes: document.getElementById("observacoes").value,
-        responsavel: document.getElementById("responsavel").value
+        responsavel: document.getElementById("responsavel").value,
+        observacoes: document.getElementById("observacoes").value
     };
 
     const response = await fetch("/checklists", {
@@ -30,5 +30,6 @@ document.getElementById("checklistForm").addEventListener("submit", async (e) =>
         document.getElementById("checklistForm").reset();
     } else {
         alert("Erro ao enviar checklist");
+        console.error(await response.text());
     }
 });
