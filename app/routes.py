@@ -1,14 +1,13 @@
 from fastapi import APIRouter, HTTPException
-from app.schemas import ChecklistCreate, ChecklistResponse
+from app.schemas import ChecklistResponse
 from app.storage import create_checklist, get_checklist_by_id
 
 router = APIRouter()
 
 
 @router.post("/checklists", response_model=ChecklistResponse)
-def criar_checklist(payload: ChecklistCreate):
-    checklist = create_checklist(payload.dict())
-    return checklist
+def criar_checklist(payload: dict):
+    return create_checklist(payload)
 
 
 @router.get("/checklists/{checklist_id}", response_model=ChecklistResponse)

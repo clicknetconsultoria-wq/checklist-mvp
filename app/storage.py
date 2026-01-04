@@ -36,7 +36,9 @@ def create_checklist(payload: dict):
 
 def get_checklist_by_id(checklist_id: str):
     data = load_checklists()
+
     for checklist in data:
         if checklist["id"] == checklist_id:
             return checklist
+
     return None
