@@ -21,16 +21,17 @@ def formulario(request: Request):
 @router.post("/checklists", response_model=ChecklistResponse)
 def criar_checklist(payload: ChecklistCreate, db: Session = Depends(get_db)):
     checklist = Checklist(
-        id=str(uuid.uuid4()),
-        cliente=payload.cliente,
-        tecnico=payload.tecnico,
         veiculo=payload.veiculo.dict(),
-        checklist=payload.checklist,
+        itens=[item.dict() for item in payload.itens],
+        observacoes=payload.observacoes,
+        responsavel=payload.responsavel,
     )
+
     db.add(checklist)
     db.commit()
     db.refresh(checklist)
     return checklist
+
 
 
 @router.get("/checklists", response_model=list[ChecklistResponse])
