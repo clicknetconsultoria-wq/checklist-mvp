@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from app.storage import create_checklist
-from app.schemas import ChecklistCreate, ChecklistResponse
+from app.schemas import ChecklistCreate, ChecklistResponse, ChecklistListResponse
 from app.storage import get_checklist_by_id
 from app.services.laudo import gerar_laudo
 from app.schemas import LaudoResponse
