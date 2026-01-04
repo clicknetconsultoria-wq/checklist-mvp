@@ -1,6 +1,4 @@
-from fastapi import APIRouter
-from app.models import ChecklistRequest
-from app.services.laudo import gerar_laudo
+from fastapi import APIRouter, HTTPException
 from app.schemas import ChecklistCreate, ChecklistResponse
 from app.storage import create_checklist, get_checklist_by_id
 
@@ -8,7 +6,7 @@ router = APIRouter()
 
 
 @router.post("/checklists", response_model=ChecklistResponse)
-def criar_checklist(payload):
+def criar_checklist(payload: ChecklistCreate):
     checklist = create_checklist(payload.dict())
     return checklist
 
