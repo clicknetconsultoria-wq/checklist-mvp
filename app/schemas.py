@@ -11,10 +11,12 @@ class ItemChecklistSchema(BaseModel):
     valor: str
 
 class ChecklistCreate(BaseModel):
+    phone: str
     veiculo: VeiculoSchema
     itens: List[ItemChecklistSchema]
     responsavel: str
     observacoes: Optional[str] = None
+
 
 class ChecklistResponse(ChecklistCreate):
     id: str

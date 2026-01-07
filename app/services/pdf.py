@@ -30,8 +30,8 @@ def gerar_pdf_laudo(checklist):
 
     y -= 0.6 * cm
     c.setFont("Helvetica", 11)
-    for item in checklist.itens:
-        c.drawString(2.5 * cm, y, f"- {item['descricao']}: {item['valor']}")
+    for item in itens:
+    linhas_itens.append(f"- {item.descricao}: {item.valor}")
         y -= 0.5 * cm
 
     y -= 0.8 * cm

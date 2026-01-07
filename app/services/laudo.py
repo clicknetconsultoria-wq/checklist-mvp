@@ -6,7 +6,7 @@ def gerar_laudo(checklist) -> str:
 
     linhas_itens = []
     for item in itens:
-        linhas_itens.append(f"- {item['descricao']}: {item['valor']}")
+    linhas_itens.append(f"- {item.descricao}: {item.valor}")
 
     texto = f"""
 📋 *LAUDO DE CHECKLIST VEICULAR*

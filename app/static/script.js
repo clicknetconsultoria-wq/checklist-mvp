@@ -19,7 +19,7 @@ document.getElementById("checklistForm").addEventListener("submit", async (e) =>
         observacoes: document.getElementById("observacoes").value
     };
 
-    const response = await fetch("/checklists", {
+    const response = await fetch("/checklist/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

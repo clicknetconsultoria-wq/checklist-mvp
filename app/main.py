@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from app.database import Base, engine
-from app.routes import router
+from app.routes.checklist import router as checklist_router
 
 Base.metadata.create_all(bind=engine)
 
