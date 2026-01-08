@@ -15,6 +15,13 @@ app.include_router(checklist_router)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
+from fastapi.responses import FileResponse
+
+@app.get("/")
+def home():
+    return FileResponse("app/templates/checklist.html")
+
+
 @app.get("/")
 def health():
     return JSONResponse({
