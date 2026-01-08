@@ -1,4 +1,6 @@
+console.log("SCRIPT CARREGADO")
 document.getElementById("checklistForm").addEventListener("submit", async (e) => {
+    console.log("SUBMIT DISPARADO")
     e.preventDefault()
 
     const itens = []
