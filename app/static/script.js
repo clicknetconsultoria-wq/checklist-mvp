@@ -21,7 +21,8 @@ document.getElementById("checklistForm").addEventListener("submit", async (e) =>
     }
 
     try {
-        const response = await fetch("/checklist/send", {
+        const response = await fetch("https://checklist-mvp-production.up.railway.app/checklist/send", {
+, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
