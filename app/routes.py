@@ -78,7 +78,7 @@ def baixar_pdf(checklist_id: str, db: Session = Depends(get_db)):
         }
     )
 
-@router.get("/pdf-preview")
+@router.get("/checklists/pdf-preview")
 def preview_pdf():
     pdf = gerar_pdf_layout_estatico()
     return StreamingResponse(
