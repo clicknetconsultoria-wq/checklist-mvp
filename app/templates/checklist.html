@@ -3,50 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <title>Checklist Veicular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<h2>Checklist Veicular</h2>
+<h1>📋 CHECKLIST VEICULAR</h1>
+<p class="subtitle">Boletim Diário de Tráfego / Estado da Viatura</p>
 
 <form id="checklistForm">
 
-    <label>Telefone (WhatsApp)</label>
-    <input type="text" id="phone" placeholder="5582998003452" required>
+    <!-- IDENTIFICAÇÃO -->
+    <section>
+        <h2>🚗 Identificação</h2>
 
-    <label>Placa</label>
-    <input type="text" id="placa" required>
+        <label>Data</label>
+        <input type="date" required>
 
-    <label>Modelo</label>
-    <input type="text" id="modelo" required>
+        <label>Veículo</label>
+        <input type="text" id="modelo" required>
 
-    <h3>Itens</h3>
+        <label>Placa</label>
+        <input type="text" id="placa" required>
 
-    <div class="item">
-        <label>Óleo</label>
-        <select data-item="Óleo">
-            <option>OK</option>
-            <option>Não OK</option>
+        <label>Lotação</label>
+        <input type="text">
+
+        <label>KM Inicial</label>
+        <input type="number">
+
+        <label>KM Final</label>
+        <input type="number">
+
+        <label>Plantão</label>
+        <select>
+            <option>12h</option>
+            <option>24h</option>
         </select>
-    </div>
 
-    <div class="item">
+        <label>Cilindro O2</label>
+        <select data-item="Cilindro O2">
+            <option>Sim</option>
+            <option>Não</option>
+        </select>
+    </section>
+
+    <!-- CONDUTORES -->
+    <section>
+        <h2>👤 Condutores</h2>
+
+        <label>Condutor de Plantão</label>
+        <input type="text" id="responsavel" required>
+
+        <label>Condutor Anterior</label>
+        <input type="text">
+    </section>
+
+    <!-- CHECKLIST -->
+    <section>
+        <h2>🛠️ Itens Verificados</h2>
+
         <label>Combustível</label>
         <select data-item="Combustível">
+            <option>Vazio</option>
             <option>1/4</option>
             <option>1/2</option>
             <option>3/4</option>
             <option>Cheio</option>
         </select>
-    </div>
 
-    <label>Observações</label>
-    <textarea id="observacoes"></textarea>
+        <label>Óleo do Motor</label>
+        <select data-item="Óleo do Motor">
+            <option>Nível</option>
+            <option>Baixo</option>
+        </select>
 
-    <label>Responsável</label>
-    <input type="text" id="responsavel" required>
+        <label>Água do Radiador</label>
+        <select data-item="Água do Radiador">
+            <option>Nível</option>
+            <option>Baixo</option>
+        </select>
 
-    <button type="submit">Enviar Checklist</button>
+        <label>Sirene</label>
+        <select data-item="Sirene">
+            <option>Sim</option>
+            <option>Não</option>
+        </select>
+
+        <label>Gabine Limpa</label>
+        <select data-item="Gabine Limpa">
+            <option>Sim</option>
+            <option>Não</option>
+        </select>
+
+        <label>Direção</label>
+        <select data-item="Direção">
+            <option>Normal</option>
+            <option>Puxando</option>
+        </select>
+    </section>
+
+    <!-- OBSERVAÇÕES -->
+    <section>
+        <h2>📝 Observações</h2>
+
+        <label>Outros Defeitos</label>
+        <textarea id="observacoes"></textarea>
+    </section>
+
+    <!-- WHATSAPP -->
+    <section>
+        <h2>📲 Envio</h2>
+
+        <label>Telefone WhatsApp</label>
+        <input type="text" id="phone" placeholder="5582998003452" required>
+
+        <button type="submit">📤 ENVIAR CHECKLIST</button>
+    </section>
+
 </form>
 
 <script src="/static/script.js"></script>
