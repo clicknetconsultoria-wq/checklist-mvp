@@ -4,8 +4,6 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 import uuid
 
-from fastapi.responses import StreamingResponse
-from app.services.pdf import gerar_pdf_layout_estatico
 
 from app.database import get_db
 from app.models import Checklist
@@ -76,13 +74,4 @@ def baixar_pdf(checklist_id: str, db: Session = Depends(get_db)):
         headers={
             "Content-Disposition": f"inline; filename=laudo_{checklist_id}.pdf"
         }
-    )
-
-@router.get("/checklists/pdf-preview")
-def preview_pdf():
-    pdf = gerar_pdf_layout_estatico()
-    return StreamingResponse(
-        pdf,
-        media_type="application/pdf",
-        headers={"Content-Disposition": "inline; filename=checklist.pdf"}
     )
