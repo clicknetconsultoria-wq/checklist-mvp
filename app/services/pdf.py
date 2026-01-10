@@ -137,3 +137,48 @@ def gerar_pdf_layout_estatico():
 
     buffer.seek(0)
     return buffer
+
+
+def gerar_pdf_checklist(checklist: dict):
+    buffer = BytesIO()
+    c = canvas.Canvas(buffer, pagesize=A4)
+    largura, altura = A4
+
+    y = altura - 2 * cm
+
+    def linha(texto, offset=0):
+        nonlocal y
+        c.drawString(2 * cm + offset, y, texto)
+        y -= 0.6 * cm
+
+    # ===== TÍTULO =====
+    c.setFont("Helvetica-Bold", 14)
+    linha("CHECK LIST VEICULAR")
+    linha("BOLETIM DIÁRIO DE TRÁFEGO / ESTADO E RECEBIMENTO DA VIATURA")
+    y -= 0.5 * cm
+
+    c.setFont("Helvetica", 10)
+
+    linha(f"DATA: {checklist.get('data', '')}")
+    linha(f"VEÍCULO: {checklist['veiculo']['modelo']}")
+    linha(f"PLACA: {checklist['veiculo']['placa']}")
+    y -= 0.5 * cm
+
+    linha("ITENS VERIFICADOS:", 0)
+    y -= 0.3 * cm
+
+    for item in checklist["itens"]:
+        linha(f"- {item['descricao']}: {item['valor']}", 10)
+
+    y -= 0.5 * cm
+    linha("OBSERVAÇÕES:")
+    linha(checklist.get("observacoes", "—"), 10)
+
+    y -= 0.5 * cm
+    linha(f"RESPONSÁVEL: {checklist['responsavel']}")
+
+    c.showPage()
+    c.save()
+    buffer.seek(0)
+
+    return buffer
